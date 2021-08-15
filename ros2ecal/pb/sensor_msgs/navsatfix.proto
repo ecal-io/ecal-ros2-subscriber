@@ -1,0 +1,43 @@
+// Navigation Satellite fix for any Global Navigation Satellite System
+//
+// Specified using the WGS 84 reference ellipsoid
+
+syntax = "proto3";
+
+import "std_msgs/header.proto";
+import "sensor_msgs/navsatstatus.proto";
+
+package pb.sensor_msgs;
+
+message NavSatFix
+{
+  // header.stamp specifies the ROS time for this measurement (the
+  //        corresponding satellite time may be reported using the
+  //        sensor_msgs/TimeReference message).
+  //
+  // header.frame_id is the frame of reference reported by the satellite
+  //        receiver, usually the location of the antenna.  This is a
+  //        Euclidean frame relative to the vehicle, not a reference
+  //        ellipsoid.
+  Header header = 1;
+
+  // Satellite fix status information.
+  NavSatStatus status = 2;
+
+  // Latitude [degrees]. Positive is north of equator; negative is south.
+  double latitude = 3;
+
+  // Longitude [degrees]. Positive is east of prime meridian; negative is west.
+  double longitude = 4;
+
+  // Altitude [m]. Positive is above the WGS 84 ellipsoid
+  // (quiet NaN if no altitude is available).
+  double altitude = 5;
+
+  // Position covariance [m^2] defined relative to a tangential plane
+  // through the reported position. The components are East, North, and
+  // Up (ENU), in row-major order.
+  //
+  // Beware: this coordinate system exhibits singularities at the poles.
+  repeated double position_covariance = 6;
+}

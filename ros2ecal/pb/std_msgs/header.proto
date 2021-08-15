@@ -1,0 +1,18 @@
+// Standard metadata for higher-level stamped data types.
+// This is generally used to communicate timestamped data
+// in a particular coordinate frame.
+
+syntax = "proto3";
+
+import "builtin_interfaces/time.proto";
+
+package pb;
+
+message Header
+{
+  // Two-integer timestamp that is expressed as seconds and nanoseconds.
+  Time stamp = 1;
+
+  // Transform frame with which this data is associated.
+  string frame_id = 2;
+}
